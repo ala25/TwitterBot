@@ -1,4 +1,4 @@
-import tweep
+import tweepy
 class TwitterAPI:
     def __init__(self):
         consumer_key = "jDtoeXv7e5AFpxwXOWgjYPpC3"
@@ -16,9 +16,17 @@ class TwitterAPI:
         list = self.api.home_timeline()
         return list
 
+    def trends(self,loc):
+        trends = self.api.trends_place(loc)
+        return trends
+
 if __name__ == "__main__":
     twitter = TwitterAPI()
     timeLine = twitter.timeLine()
-    for obj in timeLine:
-        print obj
+    globalTrends = twitter.trends(1)
+    for obj in globalTrends:
+        for s in obj[u'trends']:
+            print s[u'name']
+        
+
     
